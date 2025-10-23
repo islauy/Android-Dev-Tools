@@ -1,0 +1,3 @@
+-dontobfuscate
+-keep class androidx.* { *; }
+-keep class com.example.variableheightbanner.** { *; }
