@@ -1,7 +1,5 @@
 plugins {
     id("com.android.application") version "8.5.2"
-    id("org.jetbrains.kotlin.android") version "2.0.20"
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.20"
 }
 
 android {
@@ -33,12 +31,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlin {
-        jvmToolchain(17)
-    }
 
     buildFeatures {
-        compose = true
         buildConfig = true
     }
 
@@ -48,27 +42,17 @@ android {
 }
 
 dependencies {
-    // Compose BOM to manage Compose versions
-    implementation(platform("androidx.compose:compose-bom:2024.09.02"))
+    // Core (non-KTX to keep pure Java)
+    implementation("androidx.core:core:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.activity:activity:1.9.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    // Core
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
-    implementation("androidx.activity:activity-compose:1.9.2")
-
-    // Compose
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.foundation:foundation") // Includes HorizontalPager
-
-    // Debug
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    // View system widgets
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     // Test
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.09.02"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     testImplementation("junit:junit:4.13.2")
 }
