@@ -1,61 +1,25 @@
-# [Dev Tools(Android Developer Tools) - Device Info](https://play.google.com/store/apps/details?id=cn.trinea.android.developertools)
+# VariableHeightBanner (Jetpack Compose)
 
-**Enjoy it**：https://play.google.com/store/apps/details?id=cn.trinea.android.developertools
+一个在横向滑动时容器高度平滑过渡的 Banner 示例，类似淘宝首页横向滑动且每屏高度不一的效果（随滑动实时插值过渡）。
 
-## About this App
-The Dev Tools App is a powerful android development tool that can help you improve efficiency greatly, It can be used to view the latest open source projects, view activity history, view manifest, decompile, color picker, extract apk or so, view app info, open or close the options in the developer options quickly, and more.  
-![Android Dev Tools](https://lh3.googleusercontent.com/ERb20Y50r3u_tZMMlqpH5cnS_MC_n366WoKvEjJyFfHz6d-EwvhaEUf7ZKAgRajboTWR=w720-h440-rw)  
-You can download it from **[DevTools@Google Play](https://play.google.com/store/apps/details?id=cn.trinea.android.developertools)**.  
+## 功能
+- 使用 `HorizontalPager` 实现横向滑动
+- 不同页定义不同高度
+- 根据滑动偏移，容器高度在当前页和目标页之间平滑插值，形成过渡动画
 
-## FAQ
-Visit [the FAQ of Dev Tools App](https://docs.google.com/document/d/1xbdAdHJOXp_kQ1NrdEGE7h6oDpcGlSg40zLxM-chCb0/edit?usp=sharing)
+## 运行
+1. 用 Android Studio (Giraffe/Koala 以上版本) 打开本项目根目录。
+2. 连接设备或启动模拟器。
+3. 运行 `app` 模块。
 
-## Feedback
-Any suggestions or bugs are welcome to give us feedback: https://github.com/TimeShining/Android-Dev-Tools/issues/new
+## 关键代码
+- `MainActivity.kt` 内：
+  - `HorizontalPager` 承载 Banner 页
+  - `rememberVariableHeight(...)` 根据 `PagerState.currentPageOffsetFraction` 计算插值高度
 
-## Full description
-Android Dev Tools is a powerful, productive, automation, essential Android Development Assistant, It can improve your development productivity. It can be used to decompile other App, view layout and view of other app, view color of screen(color sampler or eyedropper), view newest open projects, view the activities history, view manifest of any apps, view recently used or installed apps, extract any app's apk or so, debug applications, view phone hardware and software-related information and so on, the more features will be added later. including:  
-### 1. Decompile other apps(Paid)
-View app's java file, resource and other file easily, support share files
-
-### 2. App Layout Inspector Tool(Paid)
-View or export layout and view info of other app, can show view id, width height, parent and child view, coordinate of view.
-
-### 3. View screen color(Paid)
-Similar to color sampler tool or eyedropper, you can view or copy the color and coordinate of any other App easily, and more ARGB and CMYK
-
-### 4. View the latest open source projects daily(Free)
-A well-selected daily Android open source project.
-
-### 5. View the activity history(Paid)
-View the appName, packageName, title, icon, start time of the activity opened, also include current activity, top activity. support open in small window mode.
-
-### 6. View manifest of any apps(Paid)
-View manifest of any apps, search any content of manifest, save manifest to sdcard in text or html.
-
-### 7. App Management——View info of apps(Free)
-You can manage your app easily. View apps installed, recently used apps, recently installed apps in grid mode.  
-View app package name, version, uid, apk dir, so dir, data dir, first install and last upgrade time, component info and so on.
-
-### 8. Pull apk or so of apps(Paid)
-Pull any app's source apk or so file.
-
-### 9. Quickly open or close the options in the developer options(Free)
-The original tens of seconds to shorten the operation of a click. Including show screen layout, debug gpu overdraw, show layout updates, forced GPU rendering, show GPU view updates, show GPU Rendering, show pointer position, strict mode, don't keep activities, stay awake, Running Service.  
-
-Note: This part of the function is to solve the cumbersome operation of the developer option through the automated way, if you are tired of the cumbersome operation of the developer option also, then this tool is for you. If you need a tool different from the system developer option, this is not what you want, don't install it, thanks.
-
-### 10. Quickly view the system info(Free)
-include system version information, hardware information, screen information, CPU information, virtual machine information, network-related information, Device ID information.
-
-### 11. Quickly open other common functions(Free)
-include settings, System UI Tuner, language switching, developer options, my applications.  
-
-**Shortcuts:**
-(1) You can add tool shortcuts to the desktop by long pressing the tool icon,  
-(2) You can add tool widgets to the desktop,  
-(3) You can start the tool through the shortcut quickly on Android 7.1, long pressing the application icon in the desktop,  
-(4) You can add the tool to the notification bar by Quick Settings Tile on Android 7.0.  
-You even don't need to open the app by these shortcuts.  
-
-**Enjoy it**：https://play.google.com/store/apps/details?id=cn.trinea.android.developertools
+## 自定义
+- 在 `BannerDemoScreen` 中修改 `items` 列表，可设置每页的标题、颜色和高度，例如：
+```kotlin
+BannerItem(title = "数码会场", color = Color(0xFF42A5F5), height = 250.dp)
+```
+- 如需更平滑/带弹性的动画，可将 `rememberVariableHeight` 中的插值值替换为 `Animatable` 或 `animateDpAsState`。
